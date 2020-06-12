@@ -1,0 +1,6 @@
+SpaceChem_Linux*.zip
+*.pkg.tar.gz
+*.pkg.tar.xz
+*.pkg.tar
+pkg/
+src/
