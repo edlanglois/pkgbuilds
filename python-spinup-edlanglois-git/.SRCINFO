@@ -1,0 +1,31 @@
+pkgbase = python-spinup-edlanglois-git
+	pkgdesc = An educational resource to help anyone learn deep reinforcement learning.
+	pkgver = 0.2.r15.c6b4b7a
+	pkgrel = 1
+	url = https://spinningup.openai.com
+	arch = any
+	license = MIT
+	checkdepends = python-pytest
+	makedepends = git
+	makedepends = python-setuptools
+	depends = python
+	depends = python-cloudpickle
+	depends = python-gym
+	depends = python-joblib
+	depends = python-matplotlib
+	depends = python-mpi4py
+	depends = python-numpy
+	depends = python-pandas
+	depends = python-psutil
+	depends = python-pytorch
+	depends = python-scipy
+	depends = python-seaborn
+	depends = python-tensorflow
+	depends = python-tqdm
+	provides = python-spinup
+	conflicts = python-spinup
+	source = python-spinup-edlanglois::git+https://github.com/edlanglois/spinningup.git#branch=master
+	sha256sums = SKIP
+
+pkgname = python-spinup-edlanglois-git
+
