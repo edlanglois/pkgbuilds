@@ -1,32 +1,38 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-# check for dwarffortress user directory
-if [[ ! -d ~/.dwarffortress ]] ; then
-  mkdir -p ~/.dwarffortress/data
+dfname="dwarffortress"
+old_user_df_dir="$HOME/.$dfname"
+if [[ -d "$old_user_df_dir" ]]; then
+	user_df_dir="$old_user_df_dir"
+else
+	user_df_dir="${XDG_DATA_HOME:-$HOME/.local/share}/$dfname"
+fi
+user_config_dir="${XDG_CONFIG_HOME:-$HOME/.config}/$dfname"
+root_df_dir="/opt/$dfname"
 
-  ln -s  /opt/dwarffortress/raw       ~/.dwarffortress/raw
-  ln -s  /opt/dwarffortress/libs      ~/.dwarffortress/libs
-  cp -rn /opt/dwarffortress/data/init ~/.dwarffortress/data/init
-
-  for link in announcement art dipscript help index initial_movies movies shader.fs shader.vs sound speech ; do
-    cp -r /opt/dwarffortress/data/$link ~/.dwarffortress/data/$link
-  done
+if [[ ! -d "$user_config_dir" ]]; then
+	mkdir -p "$user_config_dir"
+	cp -r "$root_df_dir/data/init" "$user_config_dir/init"
 fi
 
-# check for dfhack user directory
-if [[ ! -d ~/.dwarffortress/hack ]] ; then
-  ln -s /opt/dwarffortress/hack                ~/.dwarffortress/hack
-  ln -s /opt/dwarffortress/stonesense          ~/.dwarffortress/stonesense
-  ln -s /opt/dwarffortress/dfhack              ~/.dwarffortress/dfhack
-  ln -s /opt/dwarffortress/dfhack-run          ~/.dwarffortress/dfhack-run
-  ln -s /opt/dwarffortress/dfhack.init-example ~/.dwarffortress/dfhack.init-example
-  cp -r /opt/dwarffortress/dfhack-config       ~/.dwarffortress/dfhack-config
+if [[ ! -d "$user_df_dir" ]]; then
+	mkdir -p "$user_df_dir/data"
+	ln -s "$root_df_dir/"{raw,libs} "$user_df_dir/"
+	cp -r "$root_df_dir/data/"{announcement,dipscript,help,art,index,movies} "$user_df_dir/data/"
+	ln -s "$user_config_dir/init" "$user_df_dir/data/"
+	ln -s "$root_df_dir/data/"{initial_movies,shader.fs,shader.vs,sound,speech} "$user_df_dir/data/"
+fi
 
-  cp ~/.dwarffortress/dfhack.init{-example,}
+if [[ ! -d "$user_df_dir/hack" ]]; then
+	ln -s "$root_df_dir/"{hack,stonesense,dfhack,dfhack-run,dfhack.init-example} \
+		"$user_df_dir/"
+	cp -r "$root_df_dir/dfhack-config" "$user_df_dir/"
+	cp -n "$root_df_dir/dfhack.init-example" "$user_config_dir/dfhack.init"
+	ln -s "$user_config_dir/dfhack.init" "$user_df_dir/"
 fi
 
 # workaround for bug in Debian/Ubuntu SDL patch
 export SDL_DISABLE_LOCK_KEYS=1
 
-cd ~/.dwarffortress
+cd "$user_df_dir" || exit 1
 exec ./dfhack-run "$@"

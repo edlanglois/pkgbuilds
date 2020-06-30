@@ -1,4 +1,4 @@
-pkgbase = dfhack-bin
+pkgbase = dfhack-xdg-bin
 	pkgdesc = memory hacking library for Dwarf Fortress and a set of tools that use it
 	pkgver = 0.47.04
 	pkgrel = 2
@@ -21,12 +21,12 @@ pkgbase = dfhack-bin
 	conflicts = dfhack-git
 	source = dfhack.sh
 	source = dfhack-run.sh
-	md5sums = 81f5909c1a32391679f968e40f24d5ca
-	md5sums = 3853c6f890d3541f710f2c4833a9e696
+	md5sums = 4a61f9be5478f30d1f16b234fcf19537
+	md5sums = 0d0942df482c9638bb669db0048b0224
 	source_x86_64 = https://github.com/DFHack/dfhack/releases/download/0.47.04-r1/dfhack-0.47.04-r1-Linux-64bit-gcc-7.tar.bz2
 	md5sums_x86_64 = 022f09e77b1f8f124c59cf2e9636bad2
 	source_i686 = https://github.com/DFHack/dfhack/releases/download/0.47.04-r1/dfhack-0.47.04-r1-Linux-32bit-gcc-7.tar.bz2
 	md5sums_i686 = 978888a573a65148924dd1af414f2a43
 
-pkgname = dfhack-bin
+pkgname = dfhack-xdg-bin
 
