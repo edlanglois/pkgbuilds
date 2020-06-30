@@ -7,7 +7,7 @@ pkgname=dfhack-xdg-bin
 _pkgname=dfhack
 pkgver=0.47.04
 _pkgver=$pkgver-r1
-pkgrel=2
+pkgrel=3
 pkgdesc="memory hacking library for Dwarf Fortress and a set of tools that use it"
 arch=('x86_64' 'i686')
 url="https://dfhack.readthedocs.io/en/stable/"
@@ -24,8 +24,8 @@ source=(dfhack.sh
 
 md5sums_i686=('978888a573a65148924dd1af414f2a43')
 md5sums_x86_64=('022f09e77b1f8f124c59cf2e9636bad2')
-md5sums=('4a61f9be5478f30d1f16b234fcf19537'
-         '0d0942df482c9638bb669db0048b0224')
+md5sums=('SKIP'
+         'SKIP')
 
 prepare() {
   # shellcheck disable=2154
@@ -37,7 +37,7 @@ package() {
   # shellcheck disable=2154
   install -d "$pkgdir"/opt/dwarffortress
 
-  cp -r "$srcdir"/{hack,dfhack,dfhack-run,dfhack-config,dfhack.init-example,stonesense} "$pkgdir"/opt/dwarffortress
+  cp -r "$srcdir"/{hack,dfhack,dfhack-run,dfhack-config,dfhack.init-example,onLoad.init-example,stonesense} "$pkgdir"/opt/dwarffortress
 
   install -Dm755 "$srcdir"/dfhack.sh     "$pkgdir"/usr/bin/dfhack
   install -Dm755 "$srcdir"/dfhack-run.sh "$pkgdir"/usr/bin/dfhack-run

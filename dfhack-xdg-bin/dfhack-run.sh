@@ -24,7 +24,7 @@ if [[ ! -d "$user_df_dir" ]]; then
 fi
 
 if [[ ! -d "$user_df_dir/hack" ]]; then
-	ln -s "$root_df_dir/"{hack,stonesense,dfhack,dfhack-run,dfhack.init-example} \
+	ln -s "$root_df_dir/"{hack,stonesense,dfhack,dfhack-run,dfhack.init-example,onload.init-example} \
 		"$user_df_dir/"
 	cp -r "$root_df_dir/dfhack-config" "$user_df_dir/"
 	cp -n "$root_df_dir/dfhack.init-example" "$user_config_dir/dfhack.init"
