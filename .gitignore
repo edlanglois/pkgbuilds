@@ -1,0 +1,14 @@
+*/*.pkg.tar.xz
+*/pkg/
+*/src/
+
+# Python packages generally use .tar.gz source packages
+python-*/*.tar.gz
+
+dfhack-xdg-bin/dfhack-*.tar.bz2
+duplicacy-web/duplicacy-web
+mujoco-bin/mjkey.txt
+mujoco-bin/mujoco200_linux.zip
+mujoco-bin/mujoco200_resourcelicense.txt
+python-mujoco-py/mujoco-py-*-LICENSE.md
+spacechem-hib/SpaceChem*.zip
