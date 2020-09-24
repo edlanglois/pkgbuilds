@@ -1,6 +1,4 @@
-# Build and check PKGBUILDS
-
-name: CI
+name: Build and Check PKGBUILDS
 
 on: [push]
 
@@ -15,3 +13,5 @@ jobs:
         with:
           # Relative path to directory containing the PKGBUILD file.
           pkgdir: "python-seed-isort-config"
+          # Support AUR dependencies if nonempty.
+          aurDeps: 1
