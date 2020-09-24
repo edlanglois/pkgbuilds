@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-        
+
       - name: Build and Check duplicacy-web
         uses: edlanglois/pkgbuild-action@v1
         with:
@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-        
+
       - name: Build and Check python-seed-isort-config
         uses: edlanglois/pkgbuild-action@v1
         with:
