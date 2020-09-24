@@ -3,6 +3,16 @@ name: Build and Check PKGBUILDS
 on: [push]
 
 jobs:
+  duplicacy-web:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        
+      - name: Build and Check duplicacy-web
+        uses: edlanglois/pkgbuild-action@v1
+        with:
+          # Relative path to directory containing the PKGBUILD file.
+          pkgdir: "duplicacy-web"
   python-seed-isort-config:
     runs-on: ubuntu-latest
     steps:
