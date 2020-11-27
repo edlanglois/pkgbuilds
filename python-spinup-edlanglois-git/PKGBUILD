@@ -2,7 +2,7 @@
 pkgname=python-spinup-edlanglois-git
 _pyname=spinup
 pkgver=0.2.r15.c6b4b7a
-pkgrel=1
+pkgrel=2
 pkgdesc="An educational resource to help anyone learn deep reinforcement learning."
 arch=("any")
 url="https://spinningup.openai.com"
@@ -23,6 +23,7 @@ depends=(
 	"python-tensorflow"
 	"python-tqdm"
 )
+optdepends=('python-mujoco-py: MuJoCo environments')
 makedepends=("git" "python-setuptools")
 checkdepends=("python-pytest")
 provides=("${pkgname%-edlanglois-git}")
