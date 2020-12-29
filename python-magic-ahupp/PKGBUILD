@@ -1,25 +1,37 @@
 # Maintainer: Zhuoyun Wei <wzyboy@wzyboy.org>
 # Contributor: "Amhairghin" Oscar Garcia Amor (https://ogarcia.me)
 
-_pkgname='python-magic'
 pkgname=python-magic-ahupp
+_name='python-magic'
 pkgdesc='A python wrapper for libmagic'
 pkgver=0.4.18
-pkgrel=2
+pkgrel=3
 arch=('any')
-url="https://github.com/ahupp/python-magic"
+url="https://pypi.org/project/python-magic"
 license=('MIT')
 depends=('file')
 makedepends=('python-setuptools')
 conflicts=('python-magic')
 provides=('python-magic')
-source=("https://github.com/ahupp/${_pkgname}/archive/${pkgver}.tar.gz")
-sha256sums=('b787e8056c115f37e2af11e0b98dc67d5fc182ed5ed827a62f95e3a7f0ed4be4')
+source=("https://files.pythonhosted.org/packages/source/${_name::1}/$_name/$_name-$pkgver.tar.gz")
+sha256sums=('b757db2a5289ea3f1ced9e60f072965243ea43a2221430048fd8cacab17be0ce')
+
+build() {
+	cd "$_name-$pkgver"
+	python setup.py build
+}
+
+check() {
+	cd "$_name-$pkgver"
+	export LC_ALL=en_US.UTF-8
+	# For some reason the test/testdata directory is missing
+	# Just run a couple basic tests that don't use it.
+	python -m pytest "test/test.py" -k "test_version or test_getparam" --verbose
+}
 
 package() {
-  cd "${_pkgname}-${pkgver}"
-  python setup.py install --root="${pkgdir}" --optimize='1'
-
-  # doc file
-  install -D -m644 README.md "${pkgdir}/usr/share/doc/${pkgname}/README.md"
+	cd "$_name-$pkgver"
+	python setup.py install --root="$pkgdir" --optimize=1 --skip-build
+	install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+	install -D -m644 README.md "${pkgdir}/usr/share/doc/${pkgname}/README.md"
 }
