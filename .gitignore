@@ -6,6 +6,7 @@
 # Python packages generally use .tar.gz source packages
 python-*/*.tar.gz
 
+beancount/beancount-*.tar.gz
 dfhack-xdg-bin/dfhack-*.tar.bz2
 duplicacy-web/duplicacy-web
 mujoco-bin/mjkey.txt

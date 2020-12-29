@@ -3,7 +3,7 @@
 pkgname=beancount
 pkgdesc='Double-Entry Accounting from Text Files'
 pkgver=2.3.3
-pkgrel=1
+pkgrel=2
 arch=('i686' 'x86_64' 'armv7h')
 url="http://furius.ca/beancount/"
 license=('GPL')
@@ -15,7 +15,12 @@ depends=('python>=3.5' 'mpdecimal' 'python-dateutil' 'python-ply'
          'python-pytest')
 conflicts=('beancount-hg')
 
-package () {
-  cd "${pkgname}-${pkgver}"
-  python setup.py install --prefix=/usr --root="${pkgdir}"
+build() {
+	cd "$pkgname-$pkgver"
+	python setup.py build
+}
+
+package() {
+	cd "$pkgname-$pkgver"
+	python setup.py install --root="$pkgdir" --optimize=1 --skip-build
 }
