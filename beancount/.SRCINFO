@@ -1,0 +1,27 @@
+pkgbase = beancount
+	pkgdesc = Double-Entry Accounting from Text Files
+	pkgver = 2.3.3
+	pkgrel = 1
+	url = http://furius.ca/beancount/
+	arch = i686
+	arch = x86_64
+	arch = armv7h
+	license = GPL
+	depends = python>=3.5
+	depends = mpdecimal
+	depends = python-dateutil
+	depends = python-ply
+	depends = python-bottle
+	depends = python-lxml
+	depends = python-magic-ahupp
+	depends = python-beautifulsoup4
+	depends = python-chardet
+	depends = python-google-api-python-client
+	depends = python-requests
+	depends = python-pytest
+	conflicts = beancount-hg
+	source = https://files.pythonhosted.org/packages/source/b/beancount/beancount-2.3.3.tar.gz
+	sha256sums = d9a29839ea867d1dda7af1f4bf5d3959aa7c1574cd4a0bc86f69ee64c555c71c
+
+pkgname = beancount
+
