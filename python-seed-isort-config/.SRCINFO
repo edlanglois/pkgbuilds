@@ -12,4 +12,3 @@ pkgbase = python-seed-isort-config
 	sha256sums = be4cfef8f9a3fe8ea1817069c6b624538ac0b429636ec746edeb27e98ed628c8
 
 pkgname = python-seed-isort-config
-
