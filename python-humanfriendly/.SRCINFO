@@ -1,0 +1,13 @@
+pkgbase = python-humanfriendly
+	pkgdesc = Human friendly input/output in Python
+	pkgver = 9.2
+	pkgrel = 1
+	url = https://humanfriendly.readthedocs.io
+	arch = any
+	license = MIT
+	makedepends = python-setuptools
+	depends = python
+	source = https://files.pythonhosted.org/packages/source/h/humanfriendly/humanfriendly-9.2.tar.gz
+	sha256sums = f7dba53ac7935fd0b4a2fc9a29e316ddd9ea135fb3052d3d0279d10c18ff9c48
+
+pkgname = python-humanfriendly
