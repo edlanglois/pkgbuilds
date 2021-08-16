@@ -47,13 +47,3 @@ jobs:
           pkgdir: "python-seed-isort-config"
           # Support AUR dependencies if nonempty.
           aurDeps: 1
-  python-simple-term-menu:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Build and Check python-simple-term-menu
-        uses: edlanglois/pkgbuild-action@v1
-        with:
-          # Relative path to directory containing the PKGBUILD file.
-          pkgdir: "python-simple-term-menu"
