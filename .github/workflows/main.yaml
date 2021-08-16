@@ -35,6 +35,18 @@ jobs:
         with:
           # Relative path to directory containing the PKGBUILD file.
           pkgdir: "python-daemoniker"
+  python-minerl:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build and Check python-minerl
+        uses: edlanglois/pkgbuild-action@v1
+        with:
+          # Relative path to directory containing the PKGBUILD file.
+          pkgdir: "python-minerl"
+          # Support AUR dependencies if nonempty.
+          aurDeps: 1
   python-seed-isort-config:
     runs-on: ubuntu-latest
     steps:
