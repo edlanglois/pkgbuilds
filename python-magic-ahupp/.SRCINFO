@@ -1,6 +1,6 @@
 pkgbase = python-magic-ahupp
 	pkgdesc = A python wrapper for libmagic
-	pkgver = 0.4.22
+	pkgver = 0.4.24
 	pkgrel = 1
 	url = https://pypi.org/project/python-magic
 	arch = any
@@ -9,7 +9,7 @@ pkgbase = python-magic-ahupp
 	depends = file
 	provides = python-magic
 	conflicts = python-magic
-	source = https://files.pythonhosted.org/packages/source/p/python-magic/python-magic-0.4.22.tar.gz
-	sha256sums = ca884349f2c92ce830e3f498c5b7c7051fe2942c3ee4332f65213b8ebff15a62
+	source = https://files.pythonhosted.org/packages/source/p/python-magic/python-magic-0.4.24.tar.gz
+	sha256sums = de800df9fb50f8ec5974761054a708af6e4246b03b4bdaee993f948947b0ebcf
 
 pkgname = python-magic-ahupp
