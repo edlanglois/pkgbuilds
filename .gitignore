@@ -9,8 +9,6 @@ python-*/*.tar.gz
 beancount/beancount-*.tar.gz
 dfhack-xdg-bin/dfhack-*.tar.bz2
 duplicacy-web/duplicacy-web
-mujoco-bin/mjkey.txt
-mujoco-bin/mujoco200_linux.zip
-mujoco-bin/mujoco200_resourcelicense.txt
+mujoco-bin/*.tar.gz
 python-mujoco-py/mujoco-py-*-LICENSE.md
 spacechem-hib/SpaceChem*.zip
