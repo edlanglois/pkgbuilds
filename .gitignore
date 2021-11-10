@@ -9,6 +9,7 @@ python-*/*.tar.gz
 beancount/beancount-*.tar.gz
 dfhack-xdg-bin/dfhack-*.tar.bz2
 duplicacy-web/duplicacy-web
+libtorch-cuda-bin/libtorch-*.zip
 mujoco-bin/*.tar.gz
 python-mujoco-py/mujoco-py-*-gen_wrappers.py
 python-mujoco-py/mujoco-py-*-LICENSE.md

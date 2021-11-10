@@ -1,0 +1,37 @@
+# Maintainer: Eric Langlois <eric@langlois.xyz>
+# Local only - don't upload to AUR
+pkgname=libtorch-cuda-bin
+_pkgname=libtorch
+pkgver=1.10.0
+_cudaver='cu113'
+pkgrel=1
+pkgdesc="Tensors and Dynamic neural networks with strong GPU acceleration (shared libraries)"
+arch=('x86_64')
+url="https://pytorch.org"
+license=('BSD')
+conflicts=('python-pytorch')
+depends=('cuda' 'pybind11') # Likely many others
+options=(!strip)
+source=("https://download.pytorch.org/${_pkgname}/${_cudaver}/${_pkgname}-cxx11-abi-shared-with-deps-${pkgver}%2B${_cudaver}.zip")
+sha256sums=("190e963e739d5f7c2dcf94b3994de8fcd335706a4ebb333812ea7d8c841beb06")
+
+build() {
+	cd "$_pkgname"
+
+	# Part of the pybind11 dependency
+	rm -r "include/pybind11"
+}
+
+package() {
+	cd "$_pkgname"
+
+	# License not included with the pre-compiled source
+	install -d "$pkgdir/usr/include"
+	cp -a "include/." "$pkgdir/usr/include"
+
+	install -d "$pkgdir/usr/lib"
+	cp -a "lib/." "$pkgdir/usr/lib"
+
+	install -d "$pkgdir/usr/lib/cmake"
+	cp -a "share/cmake/." "$pkgdir/usr/lib/cmake"
+}

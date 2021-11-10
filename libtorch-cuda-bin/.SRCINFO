@@ -1,0 +1,15 @@
+pkgbase = libtorch-cuda-bin
+	pkgdesc = Tensors and Dynamic neural networks with strong GPU acceleration (shared libraries)
+	pkgver = 1.10.0
+	pkgrel = 1
+	url = https://pytorch.org
+	arch = x86_64
+	license = BSD
+	depends = cuda
+	depends = pybind11
+	conflicts = python-pytorch
+	options = !strip
+	source = https://download.pytorch.org/libtorch/cu113/libtorch-cxx11-abi-shared-with-deps-1.10.0%2Bcu113.zip
+	sha256sums = 190e963e739d5f7c2dcf94b3994de8fcd335706a4ebb333812ea7d8c841beb06
+
+pkgname = libtorch-cuda-bin
