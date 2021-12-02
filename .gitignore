@@ -10,6 +10,5 @@ beancount/beancount-*.tar.gz
 dfhack-xdg-bin/dfhack-*.tar.bz2
 duplicacy-web/duplicacy-web
 mujoco-bin/*.tar.gz
-python-mujoco-py/mujoco-py-*-gen_wrappers.py
 python-mujoco-py/mujoco-py-*-LICENSE.md
 spacechem-hib/SpaceChem*.zip
