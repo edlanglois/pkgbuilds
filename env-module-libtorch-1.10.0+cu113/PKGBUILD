@@ -1,0 +1,62 @@
+# Maintainer: Eric Langlois <eric@langlois.xyz>
+_pkgname=libtorch
+_cudaver=cu113
+_pkgver=1.10.0
+_pkgnamefull="${_pkgname}-${_pkgver}+${_cudaver}"
+pkgname="env-modules-${_pkgnamefull}"
+pkgver="${_pkgver}"
+pkgrel=1
+epoch=
+pkgdesc="Environment module for libtorch 1.10.0 using CUDA 11.3"
+arch=('x86_64')
+url="https://pytorch.org/"
+license=('BSD')
+groups=()
+depends=()
+makedepends=()
+checkdepends=()
+optdepends=()
+provides=()
+conflicts=()
+replaces=()
+backup=()
+options=(!strip)
+install=
+changelog=
+source=("https://download.pytorch.org/${_pkgname}/${_cudaver}/${_pkgname}-cxx11-abi-shared-with-deps-${_pkgver}%2B${_cudaver}.zip")
+noextract=()
+sha256sums=('190e963e739d5f7c2dcf94b3994de8fcd335706a4ebb333812ea7d8c841beb06')
+validpgpkeys=()
+
+build() {
+	cd "${srcdir}"
+
+	# Write the module file
+	cat > "$_pkgnamefull" << EOM
+#%Module1.0#####################################################################
+##
+## $_pkgnamefull modulefile
+##
+proc ModulesHelp { } {
+    puts stderr "\n${_pkgname} version ${_pkgver} for CUDA ${_cudaver#cu}"
+}
+
+module-whatis	"${_pkgname} version ${_pkgver} for CUDA ${_cudaver#cu}"
+
+set prefix /etc/modules/$_pkgnamefull
+
+setenv          LIBTORCH         \$prefix
+prepend-path    PATH             \$prefix/bin
+prepend-path    CPATH            \$prefix/include
+prepend-path    LD_LIBRARY_PATH  \$prefix/lib
+EOM
+}
+
+package() {
+	cd "${srcdir}"
+
+	install -d "${pkgdir}/etc/modules"
+	cp -r "$_pkgname" "${pkgdir}/etc/modules/$_pkgnamefull"
+	install -D -m644 "$_pkgnamefull" \
+		"${pkgdir}/etc/modules/modulefiles/$_pkgname/${_pkgver}+${_cudaver}"
+}

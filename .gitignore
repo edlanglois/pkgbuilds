@@ -9,6 +9,7 @@ python-*/*.tar.gz
 beancount/beancount-*.tar.gz
 dfhack-xdg-bin/dfhack-*.tar.bz2
 duplicacy-web/duplicacy-web
+env-module-libtorch-1.10.0+cu113/libtorch-*.zip
 mujoco-bin/*.tar.gz
 python-mujoco-py/mujoco-py-*-LICENSE.md
 spacechem-hib/SpaceChem*.zip
