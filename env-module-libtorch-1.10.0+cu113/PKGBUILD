@@ -57,6 +57,7 @@ package() {
 
 	install -d "${pkgdir}/etc/modules"
 	cp -r "$_pkgname" "${pkgdir}/etc/modules/$_pkgnamefull"
+	# Env modules does not like + in the version number
 	install -D -m644 "$_pkgnamefull" \
-		"${pkgdir}/etc/modules/modulefiles/$_pkgname/${_pkgver}+${_cudaver}"
+		"${pkgdir}/etc/modules/modulefiles/$_pkgname/${_pkgver}"
 }
