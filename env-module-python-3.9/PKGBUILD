@@ -1,0 +1,120 @@
+# Maintainer: Eric Langlois <eric@langlois.xyz>
+# Based on the Arch Linux PKGBUILD for Python
+# https://github.com/archlinux/svntogit-packages/blob/packages/python/trunk/PKGBUILD
+_name=python
+_ver_base=3.9
+_ver_patch=13
+_module_name="${_name}-${_ver_base}"
+pkgname="env-modules-${_module_name}"
+pkgver="${_ver_base}.${_ver_patch}"
+pkgrel=1
+pkgdesc="Environment module for Python 3.9"
+arch=('x86_64')
+url="https://www.python.org"
+license=('custom')
+depends=('bzip2' 'expat' 'gdbm' 'libffi' 'libnsl' 'libxcrypt' 'openssl' 'zlib')
+makedepends=('bluez-libs' 'mpdecimal' 'gdb')
+optdepends=('sqlite' 'mpdecimal: for decimal' 'xz: for lzma' 'tk: for tkinter')
+source=(
+    "$url/ftp/$_name/$pkgver/${_name^}-${pkgver}.tar.xz"{,.asc}
+)
+md5sums=(
+    '5e2411217b0060828d5f923eb422a3b8'
+    'SKIP'
+)
+validpgpkeys=('0D96DF4D4110E5C43FBFB17F2D347EA6AA65421D'  # Ned Deily (Python release signing key) <nad@python.org>
+              'E3FF2839C048B25C084DEBE9B26995E310250568'  # Łukasz Langa (GPG langa.pl) <lukasz@langa.pl>
+              'A035C8C19219BA821ECEA86B64E628F8D684696D') # Pablo Galindo Salgado <pablogsal@gmail.com>
+_prefix="/etc/modules/$_module_name"
+
+prepare() {
+    cd "${srcdir}/Python-${pkgver}"
+
+    # patch -p1 -i "${srcdir}/mpdecimal-2.5.1.patch"
+
+    # FS#23997
+    sed -i -e "s|^#.* /usr/local/bin/python|#!${_prefix}/bin/python|" Lib/cgi.py
+
+    # Ensure that we are using the system copy of various libraries (expat, zlib and libffi),
+    # rather than copies shipped in the tarball
+    rm -rf Modules/expat
+    rm -rf Modules/zlib
+    rm -rf Modules/_ctypes/{darwin,libffi}*
+    rm -rf Modules/_decimal/libmpdec
+}
+
+build() {
+    cd "${srcdir}/Python-${pkgver}"
+
+    CFLAGS="${CFLAGS} -fno-semantic-interposition"
+
+    export ax_cv_c_float_words_bigendian=no
+    ./configure --prefix="$_prefix" \
+              --enable-shared \
+              --with-computed-gotos \
+              --with-lto \
+              --enable-ipv6 \
+              --with-system-expat \
+              --with-dbmliborder=gdbm:ndbm \
+              --with-system-ffi \
+              --with-system-libmpdec \
+              --enable-loadable-sqlite-extensions \
+              --without-ensurepip \
+              --with-tzpath=/usr/share/zoneinfo
+
+    make EXTRA_CFLAGS="$CFLAGS"
+
+    # Write the module file
+    cat > "${srcdir}/${_module_name}" << EOM
+#%Module1.0#####################################################################
+##
+## $_module_name modulefile
+##
+proc ModulesHelp { } {
+    puts stderr "\n${_name} version ${pkgver}"
+}
+
+module-whatis   "${_name} version ${pkgver}"
+
+set prefix "${_prefix}"
+
+prepend-path    PATH             \$prefix/bin
+prepend-path    CPATH            \$prefix/include
+prepend-path    LD_LIBRARY_PATH  \$prefix/lib
+prepend-path    MANPATH          \$prefix/man
+EOM
+}
+
+package() {
+    cd "${srcdir}/Python-$pkgver"
+
+    # Hack to avoid building again
+    sed -i 's/^all:.*$/all: build_all/' Makefile
+
+    # PGO should be done with -O3
+    CFLAGS="${CFLAGS/-O2/-O3}"
+
+    make DESTDIR="${pkgdir}" EXTRA_CFLAGS="$CFLAGS" install
+
+    # Split tests
+    rm -r "${pkgdir}${_prefix}"/lib/python*/{test,ctypes/test,distutils/tests,idlelib/idle_test,lib2to3/tests,sqlite3/test,tkinter/test,unittest/test}
+
+    # Why are these not done by default...
+    ln -s python3               "${pkgdir}${_prefix}"/bin/python
+    ln -s python3-config        "${pkgdir}${_prefix}"/bin/python-config
+    ln -s idle3                 "${pkgdir}${_prefix}"/bin/idle
+    ln -s pydoc3                "${pkgdir}${_prefix}"/bin/pydoc
+    ln -s python${_ver_base}.1  "${pkgdir}${_prefix}"/share/man/man1/python.1
+
+    # some useful "stuff" FS#46146
+    install -dm755 "${pkgdir}${_prefix}"/lib/python${_ver_base}/Tools/{i18n,scripts}
+    install -m755 Tools/i18n/{msgfmt,pygettext}.py "${pkgdir}${_prefix}"/lib/python${_ver_base}/Tools/i18n/
+    install -m755 Tools/scripts/{README,*py} "${pkgdir}${_prefix}"/lib/python${_ver_base}/Tools/scripts/
+
+    # License
+    install -Dm644 LICENSE "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+
+    # Modulefile
+    install -D -m644 "${srcdir}/$_module_name" \
+        "${pkgdir}/etc/modules/modulefiles/$_name/$pkgver"
+}
