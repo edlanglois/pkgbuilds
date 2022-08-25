@@ -59,7 +59,6 @@ build() {
               --with-system-ffi \
               --with-system-libmpdec \
               --enable-loadable-sqlite-extensions \
-              --without-ensurepip \
               --with-tzpath=/usr/share/zoneinfo
 
     make EXTRA_CFLAGS="$CFLAGS"
