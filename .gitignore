@@ -8,7 +8,7 @@ python-*/*.tar.gz
 
 beancount/beancount-*.tar.gz
 dfhack-xdg-bin/dfhack-*.tar.bz2
-duplicacy-web/duplicacy-web
+duplicacy-web/duplicacy-web-*
 env-module-python-3.9/Python-*.tar.xz*
 env-module-libtorch-1.10.0+cu113/libtorch-*.zip
 mujoco-bin/*.tar.gz
