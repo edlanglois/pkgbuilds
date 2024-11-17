@@ -13,18 +13,6 @@ jobs:
         with:
           # Relative path to directory containing the PKGBUILD file.
           pkgdir: "duplicacy-web"
-  python-akro:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Build and Check python-akro
-        uses: edlanglois/pkgbuild-action@v1
-        with:
-          # Relative path to directory containing the PKGBUILD file.
-          pkgdir: "python-akro"
-          # Support AUR dependencies if nonempty.
-          aurDeps: 1
   python-daemoniker:
     runs-on: ubuntu-latest
     steps:
